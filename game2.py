@@ -357,12 +357,6 @@ def main() -> None:
         if player.hp_remaining() <= 0:
             done = True
 
-        # ----------- CHANGE ENVIRONMENT
-        # Process player movement based on mouse pos
-        mouse_pos = pygame.mouse.get_pos()
-        player.rect.x = mouse_pos[0] - player.rect.width / 2
-        player.rect.y = mouse_pos[1] - player.rect.height / 2
-
         # Check numbers of enemies currently on the screen
         if len(enemy_sprites) < 1:
             # Create enemy sprites
