@@ -342,6 +342,21 @@ def main() -> None:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    player.go_left()
+                if event.key == pygame.K_RIGHT:
+                    player.go_right()
+                if event.key == pygame.K_UP:
+                    player.jump()
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT and player.change_x < 0:
+                    player.stop()
+                if event.key == pygame.K_RIGHT and player.change_x > 0:
+                    player.stop()
+
             if event.type == pygame.MOUSEBUTTONUP:
                 if len(bullet_sprites) < 3 and time.time() - time_start > time_invincible:
                     bullet = Bullet(player.rect.midtop)
@@ -400,6 +415,8 @@ def main() -> None:
 
         # ----------- DRAW THE ENVIRONMENT
         screen.fill(BGCOLOUR)  # fill with bgcolor
+
+        current_level.draw(screen)
 
         # Draw all sprites
         all_sprites.draw(screen)
