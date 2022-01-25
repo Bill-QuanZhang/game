@@ -350,19 +350,17 @@ def main() -> None:
                     player.go_right()
                 if event.key == pygame.K_UP:
                     player.jump()
+                if event.key == pygame.K_SPACE and len(bullet_sprites) < 3 \
+                        and time.time() - time_start > time_invincible:
+                    bullet = Bullet(player.rect.midtop)
+                    bullet_sprites.add(bullet)
+                    all_sprites.add(bullet)
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT and player.change_x < 0:
                     player.stop()
                 if event.key == pygame.K_RIGHT and player.change_x > 0:
                     player.stop()
-
-            if event.type == pygame.MOUSEBUTTONUP:
-                if len(bullet_sprites) < 3 and time.time() - time_start > time_invincible:
-                    bullet = Bullet(player.rect.midtop)
-
-                    bullet_sprites.add(bullet)
-                    all_sprites.add(bullet)
 
         # Listen for the spacebar on keyboard
         if pygame.key.get_pressed()[pygame.K_SPACE]:
