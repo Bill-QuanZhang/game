@@ -416,6 +416,14 @@ def main() -> None:
             if bullet.rect.y < 0:
                 bullet.kill()
 
+        # If the player gets near the right side, shift the world left (-x)
+        if player.rect.right > SCREEN_WIDTH:
+            player.rect.right = SCREEN_WIDTH
+
+        # If the player gets near the left side, shift the world right (+x)
+        if player.rect.left < 0:
+            player.rect.left = 0
+
         # ----------- DRAW THE ENVIRONMENT
         screen.fill(BGCOLOUR)  # fill with bgcolor
 
